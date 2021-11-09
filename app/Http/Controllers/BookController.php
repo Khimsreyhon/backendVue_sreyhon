@@ -27,6 +27,10 @@ class BookController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'title'=>'min:3|max:10',
+            'body'=>'min:3|max:50'
+        ]);
         $book = new Book();
         $book->title=$request->title;
         $book->text=$request->text;

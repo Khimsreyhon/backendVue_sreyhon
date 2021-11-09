@@ -14,7 +14,7 @@ class AuthorController extends Controller
     public function index()
     {
         //
-        return Author::get();
+        return Author::get()->take(3);
     }
 
     /**
@@ -26,6 +26,11 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name'=>'min:3|max:10',
+            'age'=>'min:1|max:10',
+            'province'=>'nullable'
+        ]);
         $author=new Author();
         $author->name=$request->name;
         $author->age=$request->age;
